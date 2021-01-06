@@ -1,0 +1,22 @@
+export PREFIX=/usr/local
+export PATH="$PREFIX/bin:$PATH"
+LP="$PREFIX/include"
+export CPPFLAGS="-I$LP $CPPFLAGS"
+export CPATH="$LP:$CPATH"
+export C_INCLUDE_PATH="$LP:$C_INCLUDE_PATH"
+export CPLUS_INCLUDE_PATH="$LP:$CPLUS_INCLUDE_PATH"
+export OBJC_INCLUDE_PATH="$LP:$OBJ_INCLUDE_PATH"
+unset LP
+
+LP="$PREFIX/lib"
+export LDFLAGS="-L$LP $LDFLAGS"
+export LIBRARY_PATH="$LP:$LIBRARY_PATH"
+export LD_LIBRARY_PATH="$LP:$LD_LIBRARY_PATH"
+export LD_RUN_PATH="$LP:$LD_RUN_PATH"
+unset LP
+
+LP="$PREFIX/lib/pkgconfig"
+export PKG_CONFIG_LIBDIR="$LP:$PKG_CONFIG_LIBDIR"
+export PKG_CONFIG_PATH="$PREFIX/share/pkgconfig:$LP:$PKG_CONFIG_PATH"
+unset LP
+

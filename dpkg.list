@@ -1,0 +1,16 @@
+#! /usr/bin/env -S tail -n +2
+autoconf
+autoconf-archive
+automake
+autopoint
+build-essential
+cmake
+git
+libtool
+ninja-build
+pkg-config
+po4a
+python3-pil
+unzip
+zip
+
