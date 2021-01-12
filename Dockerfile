@@ -3,7 +3,8 @@ ARG LFS=/mnt/lfs
 USER root
 WORKDIR $LFS/sources
 COPY ./dpkg.list  /tmp/dpkg.list
-RUN sleep 91                       \
+RUN tor --verify-config            \
+ && sleep 91                       \
  && apt update                     \
  && apt full-upgrade               \
  && test -x       /tmp/dpkg.list   \
@@ -19,11 +20,11 @@ COPY ./strip.sh   \
 USER lfs
 RUN git config --global http.proxy socks5h://127.0.0.1:9050
 
-FROM scratch as squash
-COPY --from=builder-01 / /
-ARG LFS=/mnt/lfs
-USER root
-WORKDIR $LFS/sources
+#FROM scratch as squash
+#COPY --from=builder-01 / /
+#ARG LFS=/mnt/lfs
+#USER root
+#WORKDIR $LFS/sources
 
 FROM builder-01 as test
 USER root
@@ -52,5 +53,7 @@ RUN sleep 91 \
  && git clone --depth=1 --recursive https://github.com/InnovAnon-Inc/doom-base.git \
  && rm -rf                                                           doom-base
 
-FROM squash as final
+# TODO ?
+#FROM squash as final
+FROM builder-01 as final
 
