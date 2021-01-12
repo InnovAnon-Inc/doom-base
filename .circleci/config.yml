@@ -76,6 +76,8 @@ jobs:
               curl --location --request POST \
                 'https://circleci.com/api/v2/project/github/InnovAnon-Inc/docker-zlib/pipeline' \
                 --header 'Content-Type: application/json' \
+                --header 'authorization: Basic' \
+                --data '{"branch":"master"}' \
                 -u "${ZLIB_API_TOKEN}:"
             fi
 
