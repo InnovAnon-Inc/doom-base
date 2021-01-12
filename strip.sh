@@ -9,16 +9,25 @@ esac
 [[ -n "$1" ]]
 [[ -d "$1" ]]
 
-# strip archives
-find "$DIR/lib"                      \
-  -type f -name \*.a                 \
-  -exec strip --strip-debug    {}    \;
-# strip libraries
-find "$DIR/lib"                      \
-  -type f -name \*.so\*              \
-  -exec strip --strip-unneeded {}    \;
+if [[ -d "$DIR/lib" ]] ; then
+  # strip archives
+  find "$DIR/lib"                      \
+    -type f -name \*.a                 \
+    -exec strip --strip-debug    {}    \;
+  # strip libraries
+  find "$DIR/lib"                      \
+    -type f -name \*.so\*              \
+    -exec strip --strip-unneeded {}    \;
+fi
+DIRS=()
+for dir in "$DIR/"{bin,sbin,libexec} ; do
+  [[ ! -d "$dir" ]] ||
+  DIRS=("${DIRS[@]}" "$dir")
+done
+unset dir
 # strip executables
-find "$DIR/"{bin,sbin,libexec}       \
+find "${DIRS[@]}"                    \
   -type f                            \
   -exec strip --strip-all      {}    \;
+unset DIRS
 
