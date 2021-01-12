@@ -33,4 +33,7 @@ RUN command -v   strip.sh | grep /usr/local/bin \
 
 FROM scratch as squash
 COPY --from=builder-01 / /
+ARG LFS=/mnt/lfs
+USER root
+WORKDIR $LFS/sources
 
