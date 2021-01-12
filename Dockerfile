@@ -20,6 +20,12 @@ COPY ./strip.sh   \
      ./extract.sh \
                 /usr/local/bin/
 
+FROM scratch as squash
+COPY --from=builder-01 / /
+ARG LFS=/mnt/lfs
+USER root
+WORKDIR $LFS/sources
+
 FROM builder-01 as test
 USER root
 RUN command -v   strip.sh | grep /usr/local/bin \
@@ -29,11 +35,21 @@ USER lfs
 RUN command -v   strip.sh | grep /usr/local/bin \
  && command -v extract.sh | grep /usr/local/bin \
  && exec true || exec false
+RUN test -n "$PATH"               \
+ && test -n "$CPPFLAGS"           \
+ && test -n "$CPATH"              \
+ && test -n "$C_INCLUDE_PATH"     \
+ && test -n "$CPLUS_INCLUDE_PATH" \
+ && test -n "$OBJC_INCLUDE_PATH"  \
+ && test -n "$LDFLAGS"            \
+ && test -n "$LIBRARY_PATH"       \
+ && test -n "$LD_LIBRARY_PATH"    \
+ && test -n "$LD_RUN_PATH"        \
+ && test -n "$PKG_CONFIG_LIBDIR"  \
+ && test -n "$PKG_CONFIG_PATH"    \
+ && exec true || exec false
+RUN git clone --depth=1 --recursive https://github.com/InnovAnon-Inc/doom-base.git \
+ && rm -rf                                                           doom-base
 
-
-FROM scratch as squash
-COPY --from=builder-01 / /
-ARG LFS=/mnt/lfs
-USER root
-WORKDIR $LFS/sources
+FROM squash as final
 
