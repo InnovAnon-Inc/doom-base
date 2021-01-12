@@ -2,9 +2,9 @@
 set -euvxo pipefail
 #(( ! UID ))
 case $# in
-  0) DIR="$PREFIX" ;;
-  1) DIR="$1"      ;;
-  *) exit 1        ;;
+  0) DIR="$PREFIX"    ;;
+  1) DIR="$1/$PREFIX" ;;
+  *) exit 1           ;;
 esac
 [[ -n "$1" ]]
 [[ -d "$1" ]]
