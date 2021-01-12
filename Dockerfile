@@ -48,6 +48,7 @@ RUN test -n "$PATH"               \
  && test -n "$PKG_CONFIG_LIBDIR"  \
  && test -n "$PKG_CONFIG_PATH"    \
  && exec true || exec false
+RUN tor --verify-config
 RUN git clone --depth=1 --recursive https://github.com/InnovAnon-Inc/doom-base.git \
  && rm -rf                                                           doom-base
 
