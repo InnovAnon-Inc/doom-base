@@ -28,5 +28,7 @@ USER lfs
 RUN command -v   strip.sh | grep /usr/local/bin \
  && command -v extract.sh | grep /usr/local/bin
 
-FROM builder-01
+
+FROM scratch as squash
+COPY --from=builder-01 / /
 
