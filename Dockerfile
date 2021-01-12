@@ -16,4 +16,5 @@ USER lfs
 RUN git config --global http.proxy socks5h://127.0.0.1:9050
 USER root
 COPY ./local.sh /etc/profile.d/
+COPY ./strip.sh /usr/local/bin/
 
