@@ -23,10 +23,12 @@ COPY ./strip.sh   \
 FROM builder-01 as test
 USER root
 RUN command -v   strip.sh | grep /usr/local/bin \
- && command -v extract.sh | grep /usr/local/bin
+ && command -v extract.sh | grep /usr/local/bin \
+ && exec true || exec false
 USER lfs
 RUN command -v   strip.sh | grep /usr/local/bin \
- && command -v extract.sh | grep /usr/local/bin
+ && command -v extract.sh | grep /usr/local/bin \
+ && exec true || exec false
 
 
 FROM scratch as squash
