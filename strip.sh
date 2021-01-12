@@ -1,6 +1,6 @@
 #! /bin/bash
 set -euvxo pipefail
-(( ! UID ))
+#(( ! UID ))
 case $# in
   0) DIR="$PREFIX" ;;
   1) DIR="$1"      ;;
@@ -15,7 +15,7 @@ find "$DIR/lib"                      \
   -exec strip --strip-debug    {}    \;
 # strip libraries
 find "$DIR/lib"                      \
-  -type f -name \*.so*               \
+  -type f -name \*.so\*              \
   -exec strip --strip-unneeded {}    \;
 # strip executables
 find "$DIR/"{bin,sbin,libexec}       \
