@@ -9,6 +9,8 @@ esac
 [[ -n "$1" ]]
 [[ -d "$1" ]]
 
+# TODO
+if false ; then
 if [[ -d "$DIR/lib" ]] ; then
   # strip archives
   find "$DIR/lib"                      \
@@ -30,6 +32,7 @@ find "${DIRS[@]}"                    \
   -type f                            \
   -exec strip --strip-all      {}    \;
 unset DIRS
+fi
 
 rm -rf "$DIR/share/"{info,man,doc}/*
 
