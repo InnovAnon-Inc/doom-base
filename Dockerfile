@@ -3,7 +3,7 @@ ARG LFS=/mnt/lfs
 USER root
 WORKDIR $LFS/sources
 COPY ./dpkg.list  /tmp/dpkg.list
-RUN sleep 31 \
+RUN sleep 31                       \
  && apt update                     \
  && apt full-upgrade               \
  && test -x       /tmp/dpkg.list   \
@@ -17,4 +17,12 @@ RUN git config --global http.proxy socks5h://127.0.0.1:9050
 USER root
 COPY ./local.sh /etc/profile.d/
 COPY ./strip.sh /usr/local/bin/
+
+FROM builder-01 as test
+USER root
+RUN command -v strip.sh | grep /usr/local/bin
+USER lfs
+RUN command -v strip.sh | grep /usr/local/bin
+
+FROM builder-01
 
