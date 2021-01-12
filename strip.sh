@@ -31,3 +31,5 @@ find "${DIRS[@]}"                    \
   -exec strip --strip-all      {}    \;
 unset DIRS
 
+rm -rf "$DIR/share/"{info,man,doc}/*
+
