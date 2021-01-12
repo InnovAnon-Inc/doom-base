@@ -43,7 +43,8 @@ jobs:
       - run:
           name: Build application Docker image
           command: |
-            docker build \
+            docker build             \
+              --squash               \
               --cache-from=doom-base \
               -t innovanon/doom-base .
       #- run:
