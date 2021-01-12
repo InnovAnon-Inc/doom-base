@@ -22,9 +22,11 @@ COPY ./strip.sh   \
 
 FROM builder-01 as test
 USER root
-RUN command -v strip.sh | grep /usr/local/bin
+RUN command -v   strip.sh | grep /usr/local/bin \
+ && command -v extract.sh | grep /usr/local/bin
 USER lfs
-RUN command -v strip.sh | grep /usr/local/bin
+RUN command -v   strip.sh | grep /usr/local/bin \
+ && command -v extract.sh | grep /usr/local/bin
 
 FROM builder-01
 
