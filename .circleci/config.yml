@@ -78,7 +78,7 @@ jobs:
                 --header 'Content-Type: application/json' \
                 --header 'authorization: Basic' \
                 --data '{"branch":"master"}' \
-                -u "${ZLIB_API_TOKEN}:"
+                -u "${API_TOKEN}:"
             fi
 
 
