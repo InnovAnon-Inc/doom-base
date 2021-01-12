@@ -12,13 +12,12 @@ RUN sleep 91                       \
  && echo . /etc/profile.d/local.sh \
  >>   /home/lfs/.bash_profile      \
  && git config --global http.proxy socks5h://127.0.0.1:9050
-USER lfs
-RUN git config --global http.proxy socks5h://127.0.0.1:9050
-USER root
 COPY ./local.sh /etc/profile.d/
 COPY ./strip.sh   \
      ./extract.sh \
                 /usr/local/bin/
+USER lfs
+RUN git config --global http.proxy socks5h://127.0.0.1:9050
 
 FROM scratch as squash
 COPY --from=builder-01 / /
