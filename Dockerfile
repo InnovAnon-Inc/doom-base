@@ -3,7 +3,7 @@ ARG LFS=/mnt/lfs
 USER root
 WORKDIR $LFS/sources
 COPY ./dpkg.list  /tmp/dpkg.list
-RUN sleep 31                       \
+RUN sleep 91                       \
  && apt update                     \
  && apt full-upgrade               \
  && test -x       /tmp/dpkg.list   \
