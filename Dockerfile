@@ -55,5 +55,13 @@ RUN sleep 91 \
 
 # TODO ?
 #FROM squash as final
-FROM builder-01 as final
+#FROM builder-01 as final
 
+#FROM builder-01 as squash-tmp
+#USER root
+#RUN  squash.sh
+#FROM scratch as squash
+#ADD --from=squash-tmp /tmp/final.tar /
+
+
+FROM builder-01
